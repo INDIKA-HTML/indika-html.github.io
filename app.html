@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR" translate="no" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate">
+<meta name="robots" content="noindex">
+<title>INDIKA · Minha conta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090a;--bg2:#0d1012;--card:#111517;--card2:#161b1e;--line:#20272b;--line2:#2a3338;--neon:#2bff88;--soft:rgba(43,255,136,.12);--white:#f4f7f6;--mute:#8b9894;--mute2:#5f6b67;--warn:#ffc94d;--danger:#ff5c6c;--blue:#5cc8ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse at 50% -20%,rgba(43,255,136,.14),transparent 60%)}
+h1,h2,h3,.disp{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select{font:inherit;color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+.hide{display:none!important}
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:"Space Grotesk";font-weight:700;font-size:21px;letter-spacing:.06em}
+.logo b{color:var(--neon)}
+.top{position:sticky;top:0;z-index:20;background:rgba(7,9,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 20px;border-radius:13px;font-weight:600;font-size:15px;transition:.2s}
+.btn:active{transform:scale(.98)}
+.neon{background:var(--neon);color:#03140a}
+.ghost{border:1px solid var(--line2)}
+.ghost:hover{border-color:var(--neon);color:var(--neon)}
+.wa{background:#1fd468;color:#03140a}
+.sm{height:38px;padding:0 14px;font-size:13.5px;border-radius:11px}
+.block{width:100%}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.auth{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:34px 18px}
+.box{width:100%;max-width:430px}
+.box h1{font-size:30px}
+.box .s{color:var(--mute);margin:6px 0 24px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:4px;margin-bottom:22px}
+.tabs button{padding:10px;border-radius:10px;font-weight:600;font-size:14px;color:var(--mute)}
+.tabs button.on{background:var(--card2);color:var(--white);box-shadow:inset 0 0 0 1px var(--line2)}
+.f{margin-bottom:14px}
+.f label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#cfd8d5}
+.f input,.f select{width:100%;height:50px;background:var(--card);border:1px solid var(--line2);border-radius:12px;padding:0 14px;font-size:15px;outline:none}
+.f input:focus{border-color:var(--neon);box-shadow:0 0 0 4px rgba(43,255,136,.12)}
+.f small{display:block;color:var(--mute2);font-size:12px;margin-top:5px}
+.err{color:var(--danger);font-size:13px;margin:4px 0 12px;min-height:0}
+.ok{color:var(--neon);font-size:13px;margin:4px 0 12px}
+.chk{display:flex;gap:10px;font-size:13px;color:var(--mute);margin:4px 0 18px;align-items:flex-start}
+.chk input{margin-top:3px;accent-color:#2bff88}
+.chk a{color:var(--neon)}
+.link{color:var(--neon);font-size:13px}
+.main{padding:24px 0 80px}
+.hello{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.hello h1{font-size:26px}
+.hello p{color:var(--mute);font-size:14px}
+.nav2{display:flex;gap:6px;overflow-x:auto;margin-bottom:18px;scrollbar-width:none}
+.nav2 button{flex:none;padding:9px 15px;border-radius:11px;font-size:14px;font-weight:600;color:var(--mute);border:1px solid var(--line)}
+.nav2 button.on{background:var(--neon);color:#03140a;border-color:var(--neon)}
+.hero{position:relative;overflow:hidden;padding:24px;border-radius:22px;background:linear-gradient(135deg,rgba(43,255,136,.2),rgba(43,255,136,.03) 55%,var(--card));border:1px solid rgba(43,255,136,.3)}
+.hero small{color:#cfd8d5;font-size:13px;font-weight:600;letter-spacing:.04em}
+.hero .big{font-family:"Space Grotesk";font-size:clamp(36px,6vw,50px);font-weight:700;margin:6px 0 2px}
+.hero .meta{color:var(--mute);font-size:13px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.kpi{padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.kpi small{color:var(--mute);font-size:12.5px}
+.kpi b{display:block;font-family:"Space Grotesk";font-size:24px;margin-top:3px}
+.panel{margin-top:14px;padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.panel h3{font-size:17px;margin-bottom:4px}
+.panel .s{color:var(--mute);font-size:13.5px}
+.linkline{display:flex;gap:8px;align-items:center;margin-top:14px;padding:6px 6px 6px 14px;border-radius:13px;background:var(--bg);border:1px dashed rgba(43,255,136,.4)}
+.linkline code{flex:1;min-width:0;color:var(--neon);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,Menlo,monospace}
+.row{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.row:last-child{border-bottom:0}
+.row .t{flex:1;min-width:160px}
+.row .t b{display:block;font-size:14px;font-weight:600}
+.row .t small{color:var(--mute);font-size:12px}
+.row .v{font-family:"Space Grotesk";font-weight:700;text-align:right}
+.chip{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;margin-top:3px}
+.c-ok{color:var(--neon);background:var(--soft)}.c-pen{color:var(--warn);background:rgba(255,201,77,.1)}.c-no{color:var(--danger);background:rgba(255,92,108,.1)}.c-info{color:var(--blue);background:rgba(92,200,255,.1)}
+.empty{color:var(--mute);text-align:center;padding:24px 8px;font-size:14px}
+.lock{text-align:center;padding:30px 20px}
+.lock .ic{width:70px;height:70px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:var(--soft);border:1px solid rgba(43,255,136,.35);font-size:30px}
+.note{font-size:12.5px;color:var(--mute2);margin-top:14px;line-height:1.5}
+.mbtn{padding:8px 12px;border-radius:10px;font-size:12.5px;font-weight:700;border:1px solid var(--line2)}
+.mbtn.okb{background:var(--neon);color:#03140a;border-color:var(--neon)}
+.mbtn.nob{color:var(--danger);border-color:rgba(255,92,108,.4)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--white);color:#06110b;padding:12px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:.35s;z-index:99;width:max-content;max-width:calc(100vw - 32px)}
+.toast.on{transform:translate(-50%,0)}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(0,0,0,.25);border-top-color:#03140a;animation:r .7s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+.loading{min-height:60vh;display:grid;place-items:center;color:var(--mute)}
+@media(max-width:820px){.grid4{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a href="./" class="logo" translate="no"><svg width="32" height="32" viewBox="0 0 40 40"><rect x="1" y="1" width="38" height="38" rx="11" fill="#0d1012" stroke="#2bff88" stroke-width="1.6"/><circle cx="13" cy="12" r="3.2" fill="#2bff88"/><rect x="10.4" y="17.5" width="5.2" height="13" rx="2.6" fill="#f4f7f6"/><path d="M20 29 L30 13" stroke="#2bff88" stroke-width="3.4" stroke-linecap="round"/><path d="M23.5 13 H30 V19.5" stroke="#2bff88" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>INDI<b>KA</b></span></a>
+  <div id="topR"></div>
+</div></header>
+
+<div id="v-load" class="loading">Carregando…</div>
+
+<!-- LOGIN / CADASTRO -->
+<section id="v-auth" class="auth hide"><div class="box">
+  <div class="tabs"><button id="t-in" class="on">Entrar</button><button id="t-up">Criar conta</button></div>
+  <form id="f-in">
+    <h1>Bem-vindo de volta</h1><p class="s">Entre para ver suas indicações e seus ganhos.</p>
+    <div class="f"><label>E-mail</label><input id="in-email" type="email" autocomplete="email" required></div>
+    <div class="f"><label>Senha</label><input id="in-pass" type="password" autocomplete="current-password" required></div>
+    <div class="err" id="in-err"></div>
+    <button class="btn neon block" id="in-btn">Entrar</button>
+    <p style="margin-top:14px;text-align:center"><a href="#" class="link" id="forgot">Esqueci minha senha</a></p>
+  </form>
+  <form id="f-up" class="hide">
+    <h1>Crie sua conta</h1><p class="s">Use o <b style="color:var(--white)">mesmo e-mail da compra do e-book</b> para liberar seu link de afiliado.</p>
+    <div class="f"><label>Nome completo</label><input id="up-name" autocomplete="name" required></div>
+    <div class="f"><label>E-mail</label><input id="up-email" type="email" autocomplete="email" required></div>
+    <div class="f"><label>WhatsApp</label><input id="up-phone" inputmode="numeric" placeholder="(21) 99999-9999" required></div>
+    <div class="f"><label>Chave Pix (para receber suas comissões)</label><input id="up-pix" placeholder="CPF, e-mail, telefone ou aleatória" required></div>
+    <div class="f"><label>Senha</label><input id="up-pass" type="password" autocomplete="new-password" minlength="8" required><small>Mínimo 8 caracteres, com letras e números.</small></div>
+    <label class="chk"><input type="checkbox" id="up-terms"><span>Li e aceito as regras do programa e autorizo o uso dos meus dados para operar as indicações e pagamentos (LGPD).</span></label>
+    <div class="err" id="up-err"></div>
+    <button class="btn neon block" id="up-btn">Criar minha conta</button>
+  </form>
+</div></section>
+
+<!-- CONFIRMAR E-MAIL -->
+<section id="v-verify" class="auth hide"><div class="box" style="text-align:center">
+  <div class="lock"><div class="ic">✉️</div><h1 style="font-size:26px">Confirme seu e-mail</h1>
+  <p class="s" style="margin-top:8px">Enviamos um link de confirmação para <b id="vf-mail" style="color:var(--white)"></b>. Abra o e-mail (veja também o spam), clique no link e volte aqui.</p>
+  <button class="btn neon block" id="vf-check">Já confirmei</button>
+  <button class="btn ghost block" id="vf-resend" style="margin-top:10px">Reenviar e-mail</button>
+  <div class="ok" id="vf-msg"></div></div>
+</div></section>
+
+<!-- PAINEL -->
+<section id="v-app" class="hide"><div class="wrap main">
+  <div class="hello"><div><h1 id="hi">Olá!</h1><p id="hi-sub">Acompanhe suas indicações e seus ganhos.</p></div></div>
+  <div class="nav2" id="nav2">
+    <button data-tab="ganhos" class="on">Meus ganhos</button>
+    <button data-tab="perfil">Meus dados</button>
+    <button data-tab="gestao" id="tab-gestao" class="hide">Gestão</button>
+  </div>
+
+  <div id="tab-ganhos">
+    <div id="locked" class="panel hide"><div class="lock"><div class="ic">🔒</div>
+      <h3 style="font-size:20px">Libere seu link de afiliado</h3>
+      <p class="s" style="max-width:440px;margin:6px auto 18px">O programa de indicação é exclusivo para quem tem o e-book <b style="color:var(--white)">Guia Prático de IA</b>. Compre com o e-mail <b id="lk-mail" style="color:var(--white)"></b> e seu link é liberado automaticamente.</p>
+      <a class="btn neon" id="lk-buy" target="_blank" rel="noopener">Comprar o e-book · R$ 20</a>
+      <p class="note">Já comprou? A liberação pode levar alguns minutos. <a href="#" class="link" id="lk-refresh">Verificar de novo</a></p></div></div>
+
+    <div id="unlocked" class="hide">
+      <div class="hero">
+        <small>COMISSÃO COMO AFILIADO · ESTE MÊS</small>
+        <div class="big" id="g-month">R$ 0,00</div>
+        <div class="meta" id="g-meta">Cada venda feita pelo seu link gera R$ 10. O pagamento é feito via Pix 30 dias depois de cada venda.</div>
+      </div>
+      <div class="grid4">
+        <div class="kpi"><small>Vendas pelo seu link</small><b id="k-sales">0</b></div>
+        <div class="kpi"><small>A liberar (30 dias)</small><b id="k-lock" style="color:var(--warn)">R$ 0</b></div>
+        <div class="kpi"><small>Liberado a receber</small><b id="k-due" style="color:var(--neon)">R$ 0</b></div>
+        <div class="kpi"><small>Já recebido</small><b id="k-paid">R$ 0</b></div>
+      </div>
+      <div class="panel">
+        <h3>Seu link de indicação</h3>
+        <p class="s">Quem comprar o e-book por este link gera R$ 10 de comissão para você.</p>
+        <div class="linkline"><code id="mylink">…</code><button class="btn neon sm" id="copy">Copiar link</button></div>
+        <a class="btn wa block" id="share" target="_blank" rel="noopener" style="margin-top:10px">Compartilhar no WhatsApp</a>
+      </div>
+      <div class="panel">
+        <h3>Histórico de comissões</h3>
+        <div id="hist"></div>
+      </div>
+      <p class="note">Comissões só sobre vendas aprovadas feitas diretamente pelo seu link. Compras reembolsadas dentro da garantia de 7 dias cancelam a comissão. Não é investimento nem renda garantida.</p>
+    </div>
+  </div>
+
+  <div id="tab-perfil" class="hide">
+    <div class="panel" style="max-width:520px">
+      <h3>Meus dados</h3><p class="s">Mantenha sua chave Pix atualizada para receber as comissões.</p>
+      <div style="margin-top:16px">
+        <div class="f"><label>Nome</label><input id="pf-name"></div>
+        <div class="f"><label>WhatsApp</label><input id="pf-phone"></div>
+        <div class="f"><label>Chave Pix</label><input id="pf-pix"></div>
+        <div class="f"><label>E-mail</label><input id="pf-email" disabled></div>
+        <div class="f"><label>Código de indicação</label><input id="pf-code" disabled></div>
+      </div>
+      <div class="ok" id="pf-msg"></div>
+      <button class="btn neon" id="pf-save">Salvar</button>
+    </div>
+  </div>
+
+  <div id="tab-gestao" class="hide">
+    <div class="grid4">
+      <div class="kpi"><small>Vendas registradas</small><b id="a-sales">0</b></div>
+      <div class="kpi"><small>Faturamento bruto</small><b id="a-rev">R$ 0</b></div>
+      <div class="kpi"><small>A pagar agora</small><b id="a-due" style="color:var(--neon)">R$ 0</b></div>
+      <div class="kpi"><small>Afiliados cadastrados</small><b id="a-users">0</b></div>
+    </div>
+    <div class="panel">
+      <h3>Comissões a pagar agora</h3>
+      <p class="s">Vendas com mais de 30 dias. Faça o Pix pelo seu banco e depois marque como pago.</p>
+      <div id="a-pay"></div>
+    </div>
+    <div class="cols">
+      <div class="panel"><h3>A liberar (próximos 30 dias)</h3><div id="a-soon"></div></div>
+      <div class="panel"><h3>Últimas vendas</h3><div id="a-salelist"></div></div>
+    </div>
+    <div class="panel" style="max-width:620px">
+      <h3>Registrar venda manualmente</h3>
+      <p class="s">Use se alguma venda da Eduzz não aparecer sozinha aqui.</p>
+      <div style="margin-top:14px">
+        <div class="f"><label>E-mail do comprador</label><input id="m-email" type="email"></div>
+        <div class="f"><label>Código de quem indicou (opcional)</label><input id="m-ref" style="text-transform:uppercase"></div>
+        <div class="f"><label>Código da venda na Eduzz (opcional)</label><input id="m-id"></div>
+      </div>
+      <div class="err" id="m-err"></div>
+      <button class="btn neon" id="m-save">Registrar venda</button>
+    </div>
+    <div class="panel"><h3>Afiliados</h3><div id="a-userlist"></div></div>
+  </div>
+</div></section>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, orderBy, limit, Timestamp, writeBatch, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCvaQznMC35Zbo2iJSSYDfYVP6BELNGjhQ",
+  authDomain: "indika-b2624.firebaseapp.com",
+  projectId: "indika-b2624",
+  storageBucket: "indika-b2624.firebasestorage.app",
+  messagingSenderId: "541778933167",
+  appId: "1:541778933167:web:5f34b67c8aa6a6cc66eb5a"
+};
+const ADMIN = "indika.html@gmail.com";
+const CHECKOUT = "https://chk.eduzz.com/8WPNKVGPOP";
+const COMMISSION = 10, PRICE = 20, LOCK_DAYS = 30;
+const SITE = location.origin + location.pathname.replace(/app\.html$/, "");
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app); auth.languageCode = "pt";
+const db = getFirestore(app);
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const fmt = n => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const day = t => t ? t.toDate().toLocaleDateString("pt-BR") : "—";
+let tt; const toast = m => { $("#toast").textContent = m; $("#toast").classList.add("on"); clearTimeout(tt); tt = setTimeout(() => $("#toast").classList.remove("on"), 2600); };
+function show(id) { ["v-load", "v-auth", "v-verify", "v-app"].forEach(v => $("#" + v).classList.toggle("hide", v !== id)); }
+const errMsg = e => ({ "auth/email-already-in-use": "Este e-mail já tem conta. Use a aba Entrar.", "auth/invalid-email": "E-mail inválido.", "auth/weak-password": "Senha fraca: use pelo menos 8 caracteres.", "auth/invalid-credential": "E-mail ou senha incorretos.", "auth/wrong-password": "E-mail ou senha incorretos.", "auth/user-not-found": "E-mail ou senha incorretos.", "auth/too-many-requests": "Muitas tentativas. Aguarde alguns minutos." }[e.code] || "Não foi possível concluir. Tente de novo.");
+function busy(b, on, label) { b.disabled = on; b.innerHTML = on ? '<span class="spin"></span>' : label; }
+
+/* ---------- abas login/cadastro ---------- */
+function authTab(up) { $("#f-up").classList.toggle("hide", !up); $("#f-in").classList.toggle("hide", up); $("#t-up").classList.toggle("on", up); $("#t-in").classList.toggle("on", !up); }
+$("#t-in").onclick = () => authTab(false); $("#t-up").onclick = () => authTab(true);
+if (location.hash === "#cadastro") authTab(true);
+$("#up-phone").addEventListener("input", e => { let d = e.target.value.replace(/\D/g, "").slice(0, 11), o = d; if (d.length > 2) o = "(" + d.slice(0, 2) + ") " + d.slice(2); if (d.length > 7) o = "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7); e.target.value = o; });
+
+$("#f-in").onsubmit = async e => {
+  e.preventDefault(); const b = $("#in-btn"); busy(b, true); $("#in-err").textContent = "";
+  try { await signInWithEmailAndPassword(auth, $("#in-email").value.trim(), $("#in-pass").value); }
+  catch (er) { $("#in-err").textContent = errMsg(er); }
+  busy(b, false, "Entrar");
+};
+$("#forgot").onclick = async e => {
+  e.preventDefault(); const m = $("#in-email").value.trim();
+  if (!m) { $("#in-err").textContent = "Digite seu e-mail acima e clique de novo em 'Esqueci minha senha'."; return; }
+  try { await sendPasswordResetEmail(auth, m); } catch (er) { }
+  $("#in-err").textContent = ""; toast("Se o e-mail tiver conta, enviamos o link para criar uma nova senha.");
+};
+
+function genCode() { const a = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; let c = ""; for (let i = 0; i < 6; i++) c += a[Math.floor(Math.random() * a.length)]; return c; }
+async function ensureProfile(user, extra) {
+  const ref = doc(db, "users", user.uid); const snap = await getDoc(ref);
+  if (snap.exists()) return snap.data();
+  let code;
+  for (let i = 0; i < 8; i++) { const c = genCode(); try { await setDoc(doc(db, "codes", c), { uid: user.uid }); code = c; break; } catch (e) { } }
+  const data = { name: extra?.name || user.email.split("@")[0], email: user.email, phone: extra?.phone || "", pix: extra?.pix || "", code, createdAt: serverTimestamp() };
+  await setDoc(ref, data); return data;
+}
+$("#f-up").onsubmit = async e => {
+  e.preventDefault(); const b = $("#up-btn"); $("#up-err").textContent = "";
+  const name = $("#up-name").value.trim(), email = $("#up-email").value.trim().toLowerCase(), phone = $("#up-phone").value.replace(/\D/g, ""), pix = $("#up-pix").value.trim(), pass = $("#up-pass").value;
+  if (name.split(" ").filter(Boolean).length < 2) return $("#up-err").textContent = "Informe nome e sobrenome.";
+  if (phone.length < 10) return $("#up-err").textContent = "Informe o WhatsApp com DDD.";
+  if (pix.length < 5) return $("#up-err").textContent = "Informe sua chave Pix.";
+  if (pass.length < 8 || !/[a-z]/i.test(pass) || !/\d/.test(pass)) return $("#up-err").textContent = "A senha precisa ter 8+ caracteres, com letras e números.";
+  if (!$("#up-terms").checked) return $("#up-err").textContent = "É preciso aceitar as regras para continuar.";
+  busy(b, true);
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    pendingExtra = { name, phone, pix };
+    await ensureProfile(cred.user, pendingExtra);
+    await sendEmailVerification(cred.user);
+  } catch (er) { $("#up-err").textContent = errMsg(er); }
+  busy(b, false, "Criar minha conta");
+};
+let pendingExtra = null;
+
+/* ---------- confirmar e-mail ---------- */
+$("#vf-check").onclick = async () => { await auth.currentUser.reload(); await auth.currentUser.getIdToken(true); route(auth.currentUser); if (!auth.currentUser.emailVerified) $("#vf-msg").textContent = "Ainda não identificamos a confirmação. Clique no link do e-mail e tente de novo."; };
+$("#vf-resend").onclick = async () => { try { await sendEmailVerification(auth.currentUser); $("#vf-msg").textContent = "E-mail reenviado!"; } catch (e) { $("#vf-msg").textContent = "Aguarde um pouco antes de reenviar."; } };
+
+/* ---------- topo ---------- */
+function topRight(user) {
+  $("#topR").innerHTML = user ? `<button class="btn ghost sm" id="logout">Sair</button>` : `<a href="./" class="btn ghost sm">Voltar ao site</a>`;
+  if (user) $("#logout").onclick = () => signOut(auth);
+}
+
+/* ---------- painel ---------- */
+let me = null, isAdmin = false;
+$("#nav2").onclick = e => { const b = e.target.closest("[data-tab]"); if (!b) return; $$("#nav2 button").forEach(x => x.classList.toggle("on", x === b)); ["ganhos", "perfil", "gestao"].forEach(t => $("#tab-" + t).classList.toggle("hide", t !== b.dataset.tab)); if (b.dataset.tab === "gestao") loadAdmin(); };
+
+async function loadPanel(user) {
+  me = await ensureProfile(user, pendingExtra);
+  isAdmin = user.email.toLowerCase() === ADMIN && user.emailVerified;
+  $("#hi").textContent = "Olá, " + (me.name || "").split(" ")[0] + " 👋";
+  $("#tab-gestao").classList.toggle("hide", !isAdmin);
+  $("#hi-sub").textContent = isAdmin ? "Acesso de criador: indicação liberada e gestão completa." : "Acompanhe suas indicações e seus ganhos.";
+  $("#pf-name").value = me.name || ""; $("#pf-phone").value = me.phone || ""; $("#pf-pix").value = me.pix || ""; $("#pf-email").value = me.email; $("#pf-code").value = me.code || "";
+  let buyer = isAdmin;
+  if (!buyer) { try { buyer = (await getDoc(doc(db, "buyers", user.email.toLowerCase()))).exists(); } catch (e) { buyer = false; } }
+  $("#locked").classList.toggle("hide", buyer); $("#unlocked").classList.toggle("hide", !buyer);
+  $("#lk-mail").textContent = user.email; $("#lk-buy").href = CHECKOUT;
+  if (buyer) await loadEarnings(user);
+}
+$("#lk-refresh").onclick = e => { e.preventDefault(); loadPanel(auth.currentUser); };
+
+async function loadEarnings(user) {
+  const link = SITE + "?ref=" + me.code;
+  $("#mylink").textContent = link.replace(/^https?:\/\//, "");
+  $("#copy").onclick = async () => { try { await navigator.clipboard.writeText(link); toast("Link copiado!"); } catch (e) { toast("Copie o link: " + link); } };
+  $("#share").href = "https://wa.me/?text=" + encodeURIComponent(`Tô aprendendo a usar o ChatGPT e outras IAs com o e-book Guia Prático de IA, com mais de 110 comandos prontos. Dá uma olhada: ${link}`);
+  const snap = await getDocs(query(collection(db, "commissions"), where("uid", "==", user.uid)));
+  const list = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+  const now = Date.now(), m0 = new Date(); m0.setDate(1); m0.setHours(0, 0, 0, 0);
+  const valid = list.filter(c => c.status !== "cancelada");
+  const month = valid.filter(c => c.createdAt && c.createdAt.toDate() >= m0).reduce((a, c) => a + (c.value || 0), 0);
+  const lock = valid.filter(c => c.status === "pendente" && c.releaseAt && c.releaseAt.toMillis() > now).reduce((a, c) => a + c.value, 0);
+  const due = valid.filter(c => c.status === "pendente" && c.releaseAt && c.releaseAt.toMillis() <= now).reduce((a, c) => a + c.value, 0);
+  const paid = valid.filter(c => c.status === "pago").reduce((a, c) => a + c.value, 0);
+  $("#g-month").textContent = fmt(month); $("#k-sales").textContent = valid.length;
+  $("#k-lock").textContent = fmt(lock); $("#k-due").textContent = fmt(due); $("#k-paid").textContent = fmt(paid);
+  const next = valid.filter(c => c.status === "pendente").map(c => c.releaseAt).filter(Boolean).sort((a, b) => a.seconds - b.seconds)[0];
+  $("#g-meta").textContent = next ? `Próximo pagamento previsto: ${day(next)} · R$ ${COMMISSION} por venda, pago via Pix 30 dias depois da venda.` : `Cada venda feita pelo seu link gera R$ ${COMMISSION}. O pagamento é feito via Pix 30 dias depois de cada venda.`;
+  $("#hist").innerHTML = list.length ? list.map(c => {
+    const st = c.status === "pago" ? ["c-ok", "Pago em " + day(c.paidAt)] : c.status === "cancelada" ? ["c-no", "Cancelada (reembolso)"] : (c.releaseAt && c.releaseAt.toMillis() <= now) ? ["c-info", "Liberada · aguardando Pix"] : ["c-pen", "Libera em " + day(c.releaseAt)];
+    return `<div class="row"><div class="t"><b>Venda do e-book</b><small>${day(c.createdAt)}</small></div><div class="v">${c.status === "cancelada" ? "—" : "+" + fmt(c.value)}<br><span class="chip ${st[0]}">${st[1]}</span></div></div>`;
+  }).join("") : `<div class="empty">Nenhuma venda pelo seu link ainda.<br>Compartilhe seu link para começar.</div>`;
+}
+
+$("#pf-save").onclick = async () => {
+  try { await updateDoc(doc(db, "users", auth.currentUser.uid), { name: $("#pf-name").value.trim(), phone: $("#pf-phone").value.replace(/\D/g, ""), pix: $("#pf-pix").value.trim() }); $("#pf-msg").textContent = "Dados salvos!"; me.name = $("#pf-name").value.trim(); }
+  catch (e) { $("#pf-msg").textContent = "Não foi possível salvar."; }
+};
+
+/* ---------- gestão (só o criador) ---------- */
+async function loadAdmin() {
+  if (!isAdmin) return;
+  const [cs, ss, us] = await Promise.all([getDocs(collection(db, "commissions")), getDocs(query(collection(db, "sales"), orderBy("createdAt", "desc"), limit(50))).catch(() => getDocs(collection(db, "sales"))), getDocs(collection(db, "users"))]);
+  const users = {}; us.docs.forEach(d => users[d.id] = d.data());
+  const sales = ss.docs.map(d => ({ id: d.id, ...d.data() }));
+  const comms = cs.docs.map(d => ({ id: d.id, ...d.data() })).filter(c => c.status !== "cancelada");
+  const now = Date.now();
+  $("#a-sales").textContent = sales.filter(s => s.status === "paga").length;
+  $("#a-rev").textContent = fmt(sales.filter(s => s.status === "paga").reduce((a, s) => a + (s.value || PRICE), 0));
+  $("#a-users").textContent = us.size;
+  const dueList = comms.filter(c => c.status === "pendente" && c.releaseAt && c.releaseAt.toMillis() <= now);
+  const soon = comms.filter(c => c.status === "pendente" && c.releaseAt && c.releaseAt.toMillis() > now);
+  $("#a-due").textContent = fmt(dueList.reduce((a, c) => a + c.value, 0));
+  const byUser = {}; dueList.forEach(c => { (byUser[c.uid] = byUser[c.uid] || []).push(c); });
+  $("#a-pay").innerHTML = Object.keys(byUser).length ? Object.entries(byUser).map(([uid, cl]) => {
+    const u = users[uid] || {}; const tot = cl.reduce((a, c) => a + c.value, 0);
+    return `<div class="row"><div class="t"><b>${esc(u.name || "Afiliado")}</b><small>Pix: <b style="display:inline;color:#cfd8d5">${esc(u.pix || "não informado")}</b> · WhatsApp ${esc(u.phone || "—")} · ${cl.length} venda(s)</small></div><div class="v">${fmt(tot)}</div><button class="mbtn okb" data-pay="${uid}">Marcar como pago</button></div>`;
+  }).join("") : `<div class="empty">Nada a pagar agora.</div>`;
+  $$("[data-pay]").forEach(b => b.onclick = async () => {
+    const bt = writeBatch(db); byUser[b.dataset.pay].forEach(c => bt.update(doc(db, "commissions", c.id), { status: "pago", paidAt: Timestamp.now() }));
+    await bt.commit(); toast("Comissões marcadas como pagas."); loadAdmin();
+  });
+  $("#a-soon").innerHTML = soon.length ? soon.sort((a, b) => a.releaseAt.seconds - b.releaseAt.seconds).map(c => `<div class="row"><div class="t"><b>${esc((users[c.uid] || {}).name || "Afiliado")}</b><small>Libera em ${day(c.releaseAt)}</small></div><div class="v">${fmt(c.value)}</div></div>`).join("") : `<div class="empty">Nada a liberar.</div>`;
+  $("#a-salelist").innerHTML = sales.length ? sales.slice(0, 15).map(s => `<div class="row"><div class="t"><b>${esc(s.email || "comprador")}</b><small>${day(s.createdAt)}${s.ref ? " · indicado por " + esc(s.ref) : ""}${s.manual ? " · manual" : ""}</small></div><div class="v"><span class="chip ${s.status === "paga" ? "c-ok" : s.status === "reembolsada" ? "c-no" : "c-pen"}">${esc(s.status || "—")}</span></div></div>`).join("") : `<div class="empty">Nenhuma venda registrada ainda.</div>`;
+  $("#a-userlist").innerHTML = us.size ? Object.entries(users).map(([uid, u]) => `<div class="row"><div class="t"><b>${esc(u.name)}</b><small>${esc(u.email)} · código ${esc(u.code)} · Pix ${esc(u.pix || "—")}</small></div><div class="v">${comms.filter(c => c.uid === uid).length} venda(s)</div></div>`).join("") : `<div class="empty">Nenhum afiliado ainda.</div>`;
+}
+$("#m-save").onclick = async () => {
+  $("#m-err").textContent = ""; const email = $("#m-email").value.trim().toLowerCase(), ref = $("#m-ref").value.trim().toUpperCase(), sid = ($("#m-id").value.trim() || ("manual_" + email)).replace(/[\/.#\[\]]/g, "_");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return $("#m-err").textContent = "Informe o e-mail do comprador.";
+  try {
+    if ((await getDoc(doc(db, "sales", sid))).exists()) return $("#m-err").textContent = "Essa venda já foi registrada.";
+    let uid = null;
+    if (ref) { const c = await getDoc(doc(db, "codes", ref)); if (!c.exists()) return $("#m-err").textContent = "Código de indicação não encontrado."; uid = c.data().uid; const u = await getDoc(doc(db, "users", uid)); if (u.exists() && (u.data().email || "").toLowerCase() === email) uid = null; }
+    const now = Timestamp.now(), rel = Timestamp.fromMillis(Date.now() + LOCK_DAYS * 864e5);
+    const bt = writeBatch(db);
+    bt.set(doc(db, "buyers", email), { since: now, saleId: sid });
+    bt.set(doc(db, "sales", sid), { email, ref: ref || null, status: "paga", value: PRICE, createdAt: now, manual: true });
+    if (uid) bt.set(doc(db, "commissions", sid), { uid, code: ref, buyerEmail: email, value: COMMISSION, status: "pendente", createdAt: now, releaseAt: rel });
+    await bt.commit(); toast("Venda registrada."); ["#m-email", "#m-ref", "#m-id"].forEach(i => $(i).value = ""); loadAdmin();
+  } catch (e) { $("#m-err").textContent = "Não foi possível registrar."; }
+};
+
+/* ---------- roteamento ---------- */
+async function route(user) {
+  topRight(user);
+  if (!user) return show("v-auth");
+  if (!user.emailVerified) { $("#vf-mail").textContent = user.email; return show("v-verify"); }
+  show("v-load");
+  try { await loadPanel(user); show("v-app"); } catch (e) { console.error(e); show("v-app"); toast("Erro ao carregar seus dados."); }
+}
+onAuthStateChanged(auth, route);
+</script>
+</body>
+</html>

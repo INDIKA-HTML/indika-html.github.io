@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR" translate="no" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INDIKA · Guia Prático de IA | Indique. Conecte. Ganhe.</title>
+<meta name="description" content="Aprenda a usar o ChatGPT e outras IAs com o Guia Prático de IA. Indique e ganhe R$ 10 por venda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090a; --bg2:#0d1012; --card:#111517; --card2:#161b1e; --line:#20272b; --line2:#2a3338;
+  --neon:#2bff88; --neon2:#00e676; --neon-soft:rgba(43,255,136,.12); --neon-glow:rgba(43,255,136,.35);
+  --white:#f4f7f6; --mute:#8b9894; --mute2:#5f6b67; --warn:#ffc94d; --danger:#ff5c6c; --blue:#5cc8ff;
+  --r:18px; --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+h1,h2,h3,.disp{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.02em;line-height:1.1}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.view{display:none}
+.view.on{display:block;animation:viewIn .5s var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* background */
+.bg-grid{position:fixed;inset:0;z-index:-2;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.25;mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%)}
+.bg-glow{position:fixed;z-index:-1;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(43,255,136,.16),transparent 65%);top:-320px;left:50%;transform:translateX(-50%);pointer-events:none;animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.6;transform:translateX(-50%) scale(1.08)}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:50px;padding:0 24px;border-radius:14px;font-weight:600;font-size:15px;transition:transform .2s var(--ease),box-shadow .25s,background .25s,border-color .25s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-neon{background:var(--neon);color:#03140a;box-shadow:0 0 0 0 var(--neon-glow),0 10px 30px -10px var(--neon-glow)}
+.btn-neon:hover{box-shadow:0 0 0 4px rgba(43,255,136,.18),0 14px 40px -8px var(--neon-glow);transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--line2);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--neon);color:var(--neon)}
+.btn-wa{background:#1fd468;color:#03140a}
+.btn-sm{height:40px;padding:0 16px;font-size:14px;border-radius:12px}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:"Space Grotesk",Inter,sans-serif;font-weight:700;font-size:22px;letter-spacing:.06em}
+.logo svg{width:34px;height:34px;filter:drop-shadow(0 0 10px rgba(43,255,136,.45))}
+.logo b{color:var(--neon)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,9,10,.72);border-bottom:1px solid rgba(255,255,255,.05)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--mute)}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{display:flex;gap:10px}
+
+/* hero */
+.hero{padding:70px 0 90px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;border:1px solid rgba(43,255,136,.3);background:var(--neon-soft);color:var(--neon);font-size:13px;font-weight:600}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.hero h1{font-size:clamp(42px,6.4vw,78px);margin:22px 0 18px;font-weight:700}
+.hero h1 .g{color:var(--neon);text-shadow:0 0 40px rgba(43,255,136,.35)}
+.hero p.lead{font-size:18px;color:var(--mute);max-width:520px}
+.hero-cta{display:flex;gap:12px;margin:32px 0 26px;flex-wrap:wrap}
+.trust{display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--mute)}
+.trust span{display:flex;align-items:center;gap:7px}
+.trust svg{width:16px;height:16px;color:var(--neon)}
+
+/* hero visual */
+.stage{position:relative;height:540px}
+.phone{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:290px;height:540px;border-radius:42px;background:linear-gradient(160deg,#151a1d,#0a0d0e);border:1px solid var(--line2);box-shadow:0 40px 90px -30px #000,0 0 0 8px #0b0e0f,0 0 80px -20px rgba(43,255,136,.25);padding:22px 18px;overflow:hidden;animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translate(-50%,-53%)}}
+.phone .notch{width:90px;height:22px;border-radius:20px;background:#000;margin:-6px auto 18px}
+.ph-bal{padding:18px;border-radius:20px;background:linear-gradient(135deg,rgba(43,255,136,.22),rgba(43,255,136,.03));border:1px solid rgba(43,255,136,.25)}
+.ph-bal small{color:var(--mute);font-size:11px}
+.ph-bal .v{font-family:"Space Grotesk",Inter,sans-serif;font-size:32px;font-weight:700;margin-top:4px}
+.ph-row{display:flex;gap:8px;margin-top:12px}
+.ph-row div{flex:1;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px}
+.ph-row small{font-size:10px;color:var(--mute)}
+.ph-row b{display:block;font-size:17px;font-family:"Space Grotesk",Inter,sans-serif}
+.ph-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}
+.ph-av{width:30px;height:30px;border-radius:10px;background:var(--card2);display:grid;place-items:center;font-weight:700;font-size:12px;color:var(--neon)}
+.ph-item .amt{margin-left:auto;color:var(--neon);font-weight:700}
+.float-card{position:absolute;background:rgba(17,21,23,.88);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:16px;padding:13px 15px;display:flex;gap:11px;align-items:center;font-size:13px;box-shadow:0 20px 50px -20px #000}
+.float-card .ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--neon-soft);color:var(--neon)}
+.float-card small{display:block;color:var(--mute);font-size:11px}
+.fc1{top:70px;left:-4px;animation:float2 7s ease-in-out infinite}
+.fc2{bottom:90px;right:-6px;animation:float2 7s ease-in-out infinite reverse}
+@keyframes float2{50%{transform:translateY(-12px)}}
+.orbit{position:absolute;left:50%;top:50%;width:460px;height:460px;border:1px dashed rgba(43,255,136,.18);border-radius:50%;transform:translate(-50%,-50%);animation:spin 40s linear infinite}
+.orbit::after{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--neon);box-shadow:0 0 16px var(--neon)}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* sections */
+section.sec{padding:90px 0;border-top:1px solid rgba(255,255,255,.04)}
+.eyebrow{color:var(--neon);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.sec h2{font-size:clamp(30px,4vw,46px);margin:12px 0 14px}
+.sec .sub{color:var(--mute);max-width:600px;font-size:17px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+.step{position:relative;background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:border-color .3s,transform .3s var(--ease)}
+.step:hover{border-color:rgba(43,255,136,.4);transform:translateY(-4px)}
+.step .n{font-family:"Space Grotesk",Inter,sans-serif;font-size:13px;color:var(--neon);font-weight:700}
+.step .ic{width:52px;height:52px;border-radius:15px;background:var(--neon-soft);border:1px solid rgba(43,255,136,.25);display:grid;place-items:center;color:var(--neon);margin:18px 0}
+.step .ic svg{width:24px;height:24px}
+.step h3{font-size:21px;margin-bottom:8px}
+.step p{color:var(--mute);font-size:15px}
+
+.rw{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-top:10px}
+.flow{display:flex;flex-direction:column;gap:12px}
+.flow-i{display:flex;gap:16px;align-items:center;padding:18px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.flow-i .dot{width:44px;height:44px;flex:none;border-radius:13px;display:grid;place-items:center;font-weight:700;font-family:"Space Grotesk",Inter,sans-serif}
+.flow-i h4{font-size:16px}
+.flow-i p{color:var(--mute);font-size:14px}
+.rules{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:26px}
+.rules li{display:flex;gap:12px;color:#cfd8d5;font-size:15px}
+.rules svg{flex:none;width:20px;height:20px;color:var(--neon);margin-top:2px}
+
+.notice{margin-top:46px;padding:22px 24px;border-radius:var(--r);border:1px solid rgba(255,201,77,.28);background:rgba(255,201,77,.05);display:flex;gap:14px;font-size:14px;color:#e8dcbf}
+.notice svg{flex:none;width:22px;height:22px;color:var(--warn)}
+
+.faq{max-width:780px;margin-top:36px}
+.faq details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;font-weight:600;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--neon);font-size:22px;line-height:1;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:var(--mute);margin-top:10px;font-size:15px}
+
+.final{text-align:center;padding:90px 22px;border-radius:28px;margin:0 22px;background:radial-gradient(ellipse at 50% 0%,rgba(43,255,136,.2),transparent 60%),var(--card);border:1px solid var(--line)}
+.final h2{font-size:clamp(32px,5vw,54px)}
+footer{padding:50px 0 40px;color:var(--mute2);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer a:hover{color:var(--neon)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* AUTH */
+.auth{min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+.auth-side{position:relative;padding:44px;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(ellipse at 20% 20%,rgba(43,255,136,.18),transparent 55%),var(--bg2);border-right:1px solid var(--line);overflow:hidden}
+.auth-side h2{font-size:44px;max-width:420px}
+.auth-side h2 span{color:var(--neon)}
+.auth-side .bul{display:flex;flex-direction:column;gap:14px;margin-top:28px;color:#cfd8d5}
+.auth-side .bul div{display:flex;gap:10px;align-items:center}
+.auth-side .bul svg{width:20px;height:20px;color:var(--neon)}
+.auth-main{display:flex;align-items:center;justify-content:center;padding:40px 22px}
+.auth-box{width:100%;max-width:420px}
+.auth-box .back{display:inline-flex;align-items:center;gap:6px;color:var(--mute);font-size:14px;margin-bottom:26px}
+.auth-box .back:hover{color:var(--neon)}
+.auth-box h1{font-size:34px}
+.auth-box .s{color:var(--mute);margin:8px 0 28px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:26px}
+.tabs a{text-align:center;padding:10px;border-radius:10px;font-weight:600;font-size:14px;color:var(--mute);transition:.25s}
+.tabs a.on{background:var(--card2);color:var(--white);box-shadow:inset 0 0 0 1px var(--line2)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:#cfd8d5}
+.inp{position:relative}
+.inp input{width:100%;height:52px;background:var(--card);border:1px solid var(--line2);border-radius:13px;padding:0 16px 0 46px;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
+.inp input:focus{border-color:var(--neon);box-shadow:0 0 0 4px rgba(43,255,136,.12)}
+.inp input.bad{border-color:var(--danger)}
+.inp > svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--mute2);pointer-events:none}
+.inp .eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--mute);padding:6px}
+.inp .eye svg{width:18px;height:18px}
+.err{color:var(--danger);font-size:12px;margin-top:6px;min-height:0;display:none}
+.err.on{display:block}
+.meter{display:flex;gap:5px;margin-top:9px}
+.meter i{flex:1;height:4px;border-radius:4px;background:var(--line2);transition:background .3s}
+.meter-t{font-size:12px;color:var(--mute);margin-top:6px}
+.ref-ok{display:none;align-items:center;gap:8px;padding:11px 14px;border-radius:12px;background:var(--neon-soft);border:1px solid rgba(43,255,136,.3);color:var(--neon);font-size:13px;margin-bottom:16px}
+.ref-ok.on{display:flex}
+.check{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:var(--mute);margin:6px 0 20px;cursor:pointer}
+.check input{appearance:none;flex:none;width:20px;height:20px;border-radius:6px;border:1px solid var(--line2);background:var(--card);margin-top:1px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.check input:checked{background:var(--neon);border-color:var(--neon)}
+.check input:checked::after{content:"";width:9px;height:5px;border:2px solid #03140a;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+.check a{color:var(--neon)}
+.row-b{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin:-4px 0 20px}
+.row-b a{color:var(--neon)}
+.divider{display:flex;align-items:center;gap:12px;color:var(--mute2);font-size:12px;margin:20px 0}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.secure{display:flex;justify-content:center;align-items:center;gap:7px;font-size:12px;color:var(--mute2);margin-top:22px}
+.secure svg{width:14px;height:14px}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(0,0,0,.25);border-top-color:#03140a;animation:rot .7s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* DASHBOARD */
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.side{position:sticky;top:0;height:100vh;padding:26px 18px;border-right:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column}
+.side .logo{margin:0 8px 34px}
+.menu{display:flex;flex-direction:column;gap:4px}
+.menu a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;color:var(--mute);font-weight:500;font-size:14px;transition:.2s}
+.menu a svg{width:19px;height:19px}
+.menu a:hover{color:var(--white);background:rgba(255,255,255,.03)}
+.menu a.on{color:var(--neon);background:var(--neon-soft)}
+.side .me{margin-top:auto;display:flex;align-items:center;gap:11px;padding:12px;border-radius:14px;border:1px solid var(--line)}
+.av{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--neon),#0bb35c);color:#03140a;display:grid;place-items:center;font-weight:700;flex:none}
+.me .nm{font-weight:600;font-size:14px;line-height:1.2}
+.me small{color:var(--mute);font-size:12px}
+.me button{margin-left:auto;color:var(--mute);padding:6px}
+.me button:hover{color:var(--danger)}
+.me button svg{width:18px;height:18px}
+.main{padding:30px 34px 60px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;gap:14px}
+.top h1{font-size:28px}
+.top p{color:var(--mute);font-size:14px}
+.top .mob-logo{display:none}
+.bell{position:relative;width:44px;height:44px;border-radius:13px;border:1px solid var(--line);display:grid;place-items:center;color:var(--mute)}
+.bell svg{width:20px;height:20px}
+.bell i{position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:var(--neon);box-shadow:0 0 8px var(--neon)}
+
+.grid-top{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+.balance{position:relative;overflow:hidden;padding:28px;border-radius:24px;background:linear-gradient(135deg,rgba(43,255,136,.2) 0%,rgba(43,255,136,.04) 55%,var(--card) 100%);border:1px solid rgba(43,255,136,.28)}
+.balance::before{content:"";position:absolute;width:300px;height:300px;right:-90px;top:-120px;border-radius:50%;background:radial-gradient(circle,rgba(43,255,136,.3),transparent 70%)}
+.balance .lbl{display:flex;align-items:center;gap:10px;color:#cfd8d5;font-size:14px;position:relative}
+.balance .lbl button{color:var(--mute);display:grid}
+.balance .lbl button svg{width:18px;height:18px}
+.balance .big{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(38px,5vw,52px);font-weight:700;margin:8px 0 4px;position:relative}
+.balance .big small{font-size:.5em;color:var(--mute);margin-right:4px}
+.balance .meta{color:var(--mute);font-size:13px;position:relative}
+.balance .acts{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;position:relative}
+.camp{padding:24px;border-radius:24px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.camp .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:8px;background:var(--neon-soft);color:var(--neon)}
+.camp h3{font-size:22px;margin:14px 0 6px}
+.camp p{color:var(--mute);font-size:14px}
+.camp .val{margin-top:auto;padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between}
+.camp .val b{font-family:"Space Grotesk",Inter,sans-serif;font-size:34px;color:var(--neon)}
+.camp .val span{font-size:12px;color:var(--mute);text-align:right}
+.prog{height:6px;border-radius:6px;background:var(--line2);margin-top:12px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--neon);border-radius:6px;box-shadow:0 0 12px var(--neon);transition:width 1.2s var(--ease)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.stat{padding:20px;border-radius:18px;background:var(--card);border:1px solid var(--line);transition:border-color .3s}
+.stat:hover{border-color:var(--line2)}
+.stat .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px}
+.stat .ic svg{width:19px;height:19px}
+.stat small{color:var(--mute);font-size:13px}
+.stat b{display:block;font-family:"Space Grotesk",Inter,sans-serif;font-size:28px;margin-top:2px}
+
+.refbox{margin-top:18px;padding:24px;border-radius:24px;background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center}
+.refbox h3{font-size:19px}
+.refbox p{color:var(--mute);font-size:14px;margin-top:4px}
+.linkline{display:flex;align-items:center;gap:10px;margin-top:16px;padding:6px 6px 6px 16px;border-radius:14px;background:var(--bg);border:1px dashed rgba(43,255,136,.35)}
+.linkline code{flex:1;min-width:0;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;color:var(--neon);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.codechip{text-align:center;padding:16px 22px;border-radius:18px;background:var(--bg);border:1px solid var(--line)}
+.codechip small{color:var(--mute);font-size:12px}
+.codechip b{display:block;font-family:"Space Grotesk",Inter,sans-serif;font-size:26px;letter-spacing:.12em;color:var(--white)}
+
+.cols{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;margin-top:18px}
+.panel{padding:22px;border-radius:24px;background:var(--card);border:1px solid var(--line);min-width:0}
+.panel-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.panel-h h3{font-size:18px}
+.filters{display:flex;gap:6px}
+.filters button{padding:7px 12px;border-radius:10px;font-size:12px;font-weight:600;color:var(--mute);border:1px solid var(--line)}
+.filters button.on{color:var(--neon);border-color:rgba(43,255,136,.4);background:var(--neon-soft)}
+.li{display:flex;align-items:center;gap:13px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.li:last-child{border-bottom:0}
+.li .av{width:40px;height:40px;font-size:14px;background:var(--card2);color:var(--neon);border:1px solid var(--line2)}
+.li .t{flex:1;min-width:0}
+.li .t b{display:block;font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .t small{color:var(--mute);font-size:12px}
+.li .r{text-align:right}
+.li .r b{display:block;font-family:"Space Grotesk",Inter,sans-serif;font-size:15px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;margin-top:3px}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.c-ok{color:var(--neon);background:var(--neon-soft)}
+.c-pen{color:var(--warn);background:rgba(255,201,77,.1)}
+.c-no{color:var(--danger);background:rgba(255,92,108,.1)}
+.c-info{color:var(--blue);background:rgba(92,200,255,.1)}
+.mv-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.mv-ic svg{width:18px;height:18px}
+.plus{color:var(--neon)}
+.minus{color:var(--white)}
+.empty{text-align:center;color:var(--mute);padding:30px 10px;font-size:14px}
+
+.help{margin-top:18px;padding:20px 22px;border-radius:20px;border:1px solid var(--line);background:var(--bg2);display:flex;gap:14px;align-items:flex-start;font-size:13px;color:var(--mute)}
+.help svg{flex:none;width:20px;height:20px;color:var(--neon)}
+
+.botnav{display:none}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px}
+.modal.on{display:flex;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.sheet{width:100%;max-width:440px;background:var(--card);border:1px solid var(--line2);border-radius:26px;padding:26px;animation:up .35s var(--ease);max-height:92vh;overflow:auto}
+@keyframes up{from{transform:translateY(30px);opacity:0}}
+.sheet-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sheet-h h3{font-size:22px}
+.sheet-h button{width:36px;height:36px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;color:var(--mute)}
+.sheet .s{color:var(--mute);font-size:14px;margin-bottom:20px}
+.amount{display:flex;align-items:center;gap:6px;padding:16px 18px;border-radius:16px;background:var(--bg);border:1px solid var(--line2);margin-bottom:10px}
+.amount span{font-family:"Space Grotesk",Inter,sans-serif;font-size:22px;color:var(--mute)}
+.amount input{flex:1;min-width:0;background:none;border:0;outline:none;font-family:"Space Grotesk",Inter,sans-serif;font-size:34px;font-weight:700}
+.quick{display:flex;gap:8px;margin-bottom:18px}
+.quick button{flex:1;padding:9px;border-radius:11px;border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--mute)}
+.quick button:hover{border-color:var(--neon);color:var(--neon)}
+.inp.nopad input{padding-left:16px}
+.rulebox{padding:14px 16px;border-radius:14px;background:var(--bg2);border:1px solid var(--line);font-size:12.5px;color:var(--mute);margin:4px 0 18px;display:flex;flex-direction:column;gap:6px}
+.rulebox div{display:flex;justify-content:space-between}
+.rulebox b{color:var(--white);font-weight:600}
+.success{text-align:center;padding:10px 0}
+.success .ring{width:84px;height:84px;margin:6px auto 18px;border-radius:50%;background:var(--neon-soft);border:1px solid rgba(43,255,136,.4);display:grid;place-items:center;color:var(--neon);animation:pop .5s var(--ease)}
+.success .ring svg{width:40px;height:40px}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+
+.toast{width:max-content;max-width:calc(100vw - 32px);position:fixed;left:50%;bottom:28px;transform:translate(-50%,120px);z-index:200;background:var(--white);color:#06110b;padding:13px 20px;border-radius:14px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px;transition:transform .4s var(--ease);box-shadow:0 20px 50px -10px rgba(0,0,0,.6)}
+.toast.on{transform:translate(-50%,0)}
+.toast svg{width:18px;height:18px;color:#0bb35c}
+
+/* responsive */
+@media (max-width:980px){
+  .hero .wrap,.rw{grid-template-columns:1fr}
+  .stage{height:520px}
+  .steps{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .auth{grid-template-columns:1fr}
+  .auth-side{display:none}
+  .grid-top,.cols{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:820px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .main{padding:18px 16px 110px}
+  .top .mob-logo{display:inline-flex}
+  .top .greet{display:none}
+  .refbox{grid-template-columns:1fr}
+  .codechip{order:-1;display:flex;justify-content:space-between;align-items:center;text-align:left}
+  .botnav{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;background:rgba(17,21,23,.92);backdrop-filter:blur(14px);border:1px solid var(--line2);border-radius:22px;padding:8px;justify-content:space-around}
+  .botnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--mute);padding:6px 10px;border-radius:12px}
+  .botnav a svg{width:21px;height:21px}
+  .botnav a.on{color:var(--neon)}
+  .modal{align-items:flex-end;padding:0}
+  .sheet{border-radius:26px 26px 0 0;max-width:none}
+}
+@media (max-width:560px){
+  .nav-cta .btn-ghost{display:none}
+  .hero{padding:40px 0 60px}
+  .hero-cta .btn{flex:1}
+  .stage{height:470px;transform:scale(.9)}
+  .orbit{width:360px;height:360px}
+  .fc1{left:0}.fc2{right:0}
+  .stat b{font-size:24px}
+  .balance .acts .btn{flex:1}
+  .filters button{padding:6px 9px}
+}
+
+/* E-BOOK */
+.ebk{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}
+.ebk-cover{display:flex;justify-content:center;perspective:1200px}
+.cover{width:300px;height:420px;border-radius:10px 22px 22px 10px;padding:30px 28px;display:flex;flex-direction:column;background:radial-gradient(ellipse at 80% 0%,rgba(43,255,136,.35),transparent 55%),linear-gradient(160deg,#121719,#050707);border:1px solid rgba(43,255,136,.35);box-shadow:-14px 0 0 -6px #0b2b19,0 40px 80px -25px #000,0 0 80px -20px rgba(43,255,136,.35);transform:rotateY(-14deg) rotateX(4deg);animation:bk 6s ease-in-out infinite}
+@keyframes bk{50%{transform:rotateY(-6deg) rotateX(2deg) translateY(-8px)}}
+.cv-top{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--mute)}
+.cv-t{font-family:"Space Grotesk",Inter,sans-serif;font-weight:700;font-size:40px;line-height:1.02;margin-top:auto;letter-spacing:-.02em}
+.cv-s{color:#cfd8d5;font-size:14px;margin-top:12px}
+.cv-b{margin-top:22px;align-self:flex-start;background:var(--neon);color:#03140a;font-weight:700;font-size:12px;padding:7px 12px;border-radius:8px}
+.ebk-buy{display:flex;align-items:center;gap:22px;margin-top:28px;padding:18px 18px 18px 24px;border-radius:20px;background:var(--card);border:1px solid var(--line);flex-wrap:wrap}
+.ebk-buy small{color:var(--mute);font-size:12px}
+.ebk-buy b{display:block;font-family:"Space Grotesk",Inter,sans-serif;font-size:34px;color:var(--neon)}
+.ebk-buy .btn{margin-left:auto}
+.mybook{margin-top:18px;padding:20px 22px;border-radius:24px;background:var(--card);border:1px solid var(--line);display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.mini-cover{width:64px;height:88px;flex:none;border-radius:5px 10px 10px 5px;background:radial-gradient(ellipse at 80% 0%,rgba(43,255,136,.45),transparent 60%),#0a0d0e;border:1px solid rgba(43,255,136,.4);display:grid;place-items:center}
+.mini-cover svg{width:26px;height:26px}
+.mybook .t{flex:1;min-width:180px}
+.mybook h3{font-size:17px}
+.mybook p{color:var(--mute);font-size:13px;margin-top:3px}
+.qr{width:200px;height:200px;margin:4px auto 16px;background:#fff;border-radius:16px;padding:12px}
+.pixcode{display:flex;gap:8px;align-items:center;padding:6px 6px 6px 14px;border-radius:12px;background:var(--bg);border:1px dashed var(--line2);margin-bottom:16px}
+.pixcode code{flex:1;min-width:0;font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,Menlo,monospace}
+.learn{list-style:none;display:flex;flex-direction:column;gap:9px;margin:14px 0 18px;font-size:14px;color:#cfd8d5}
+.learn li{display:flex;gap:10px}
+.learn svg{width:18px;height:18px;flex:none;color:var(--neon);margin-top:2px}
+
+.topbar{background:#0d1a12;border-bottom:1px solid rgba(43,255,136,.25);font-size:13px;color:#cfd8d5}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:38px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.topbar .g2{color:#2bff88;font-weight:700}
+.topbar a{color:#2bff88;font-weight:600;white-space:nowrap}
+/* VIDEO */
+.vid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.vframe{justify-self:center;width:min(340px,100%);aspect-ratio:9/16;border-radius:28px;overflow:hidden;border:1px solid rgba(43,255,136,.35);box-shadow:0 40px 90px -30px #000,0 0 80px -20px rgba(43,255,136,.35);background:#000}
+.vframe video{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:980px){.vid{grid-template-columns:1fr;gap:30px}}
+/* ADMIN */
+.adm-top{position:sticky;top:0;z-index:50;background:rgba(7,9,10,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.adm-bar{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
+.adm-badge{font-size:11px;font-weight:700;letter-spacing:.12em;padding:5px 10px;border-radius:8px;background:rgba(255,201,77,.12);color:var(--warn);margin-left:10px}
+.adm-tabs{display:flex;gap:6px;overflow-x:auto;padding:0 0 12px;scrollbar-width:none}
+.adm-tabs::-webkit-scrollbar{display:none}
+.adm-tabs button{flex:none;display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:11px;font-size:14px;font-weight:600;color:var(--mute);border:1px solid var(--line)}
+.adm-tabs button.on{color:#03140a;background:var(--neon);border-color:var(--neon)}
+.adm-tabs .cnt{font-size:11px;min-width:20px;height:20px;border-radius:10px;display:inline-grid;place-items:center;padding:0 6px;background:var(--warn);color:#1a1200}
+.adm-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:6px 0 18px;flex-wrap:wrap}
+.adm-h h1{font-size:26px}
+.adm-h p{color:var(--mute);font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{padding:18px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.kpi small{color:var(--mute);font-size:12.5px}
+.kpi b{display:block;font-family:"Space Grotesk",Inter,sans-serif;font-size:26px;margin-top:4px}
+.kpi span{font-size:12px;color:var(--mute2)}
+.kpi.hi{background:linear-gradient(135deg,rgba(43,255,136,.16),var(--card));border-color:rgba(43,255,136,.3)}
+.kpi.hi b{color:var(--neon)}
+.bars{display:flex;align-items:flex-end;gap:6px;height:150px;padding-top:10px}
+.bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bars i{display:block;width:100%;max-width:26px;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,var(--neon),#0f8a4a);min-height:3px}
+.bars small{font-size:10px;color:var(--mute2)}
+.arow{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.arow:last-child{border-bottom:0}
+.arow .t{flex:1;min-width:170px}
+.arow .t b{display:block;font-size:14px;font-weight:600}
+.arow .t small{color:var(--mute);font-size:12px}
+.arow .v{font-family:"Space Grotesk",Inter,sans-serif;font-weight:700;min-width:90px;text-align:right}
+.arow .acts{display:flex;gap:6px;flex-wrap:wrap}
+.mbtn{padding:8px 12px;border-radius:10px;font-size:12.5px;font-weight:700;border:1px solid var(--line2);color:var(--white)}
+.mbtn.ok{background:var(--neon);color:#03140a;border-color:var(--neon)}
+.mbtn.no{color:var(--danger);border-color:rgba(255,92,108,.4)}
+.mbtn:hover{filter:brightness(1.1)}
+.flag{display:inline-flex;font-size:11px;font-weight:700;padding:3px 8px;border-radius:7px;background:rgba(255,92,108,.12);color:var(--danger);margin:3px 4px 0 0}
+.search{height:44px;width:100%;max-width:320px;background:var(--card);border:1px solid var(--line2);border-radius:12px;padding:0 14px;outline:none}
+.search:focus{border-color:var(--neon)}
+.cfg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cfg .field input{padding-left:16px}
+.margin{padding:16px 18px;border-radius:16px;background:var(--bg2);border:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
+.margin b{color:var(--white)}
+.log{font-size:12.5px;color:var(--mute);padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
+.log b{color:#cfd8d5;font-weight:600}
+@media (max-width:980px){.ebk{grid-template-columns:1fr;gap:40px}.kpis{grid-template-columns:repeat(2,1fr)}.cfg{grid-template-columns:1fr}}
+@media (max-width:560px){.arow .v{min-width:0;text-align:left}.arow .acts{width:100%}.arow .acts .mbtn{flex:1}.kpi b{font-size:22px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div><div class="bg-glow"></div>
+
+<!-- SVG sprite -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="logo" viewBox="0 0 40 40">
+      <rect x="1" y="1" width="38" height="38" rx="11" fill="#0d1012" stroke="#2bff88" stroke-width="1.6"/>
+      <circle cx="13" cy="12" r="3.2" fill="#2bff88"/>
+      <rect x="10.4" y="17.5" width="5.2" height="13" rx="2.6" fill="#f4f7f6"/>
+      <path d="M20 29 L30 13" stroke="#2bff88" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M23.5 13 H30 V19.5" stroke="#2bff88" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H5a2 2 0 0 1 0-4h13v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15V7"/><circle cx="16" cy="14" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v1M16 4a4 4 0 0 1 0 8M22 21v-1a6 6 0 0 0-4-5.6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eyeoff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.9 17.9A10 10 0 0 1 12 20C5 20 1 12 1 12a18 18 0 0 1 5.1-5.9M9.9 4.2A9 9 0 0 1 12 4c7 0 11 8 11 8a18 18 0 0 1-2.2 3.2M1 1l22 22M14.1 14.1a3 3 0 1 1-4.2-4.2"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7 7 17M16 17H7V8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= LANDING ================= -->
+<div class="view" id="v-inicio">
+  <div class="topbar"><div class="wrap"><span><b>Comissão como afiliado:</b> <span class="g2">R$ 10 por venda</span> · paga via Pix</span><a href="app.html">Ver meus ganhos →</a></div></div>
+  <nav class="nav"><div class="wrap">
+    <a href="#inicio" class="logo"><svg><use href="#logo"/></svg><span>INDI<b>KA</b></span></a>
+    <div class="nav-links"><a href="#" data-scroll="ebook">E-book</a><a href="#" data-scroll="video">Vídeo</a><a href="#" data-scroll="como">Como funciona</a><a href="#" data-scroll="recompensas">Comissões</a><a href="#" data-scroll="duvidas">Dúvidas</a></div>
+    <div class="nav-cta"><a href="app.html" class="btn btn-ghost btn-sm">Entrar</a><a href="https://chk.eduzz.com/8WPNKVGPOP" data-buy target="_blank" rel="noopener" class="btn btn-neon btn-sm">Comprar e-book</a></div>
+  </div></nav>
+
+  <header class="hero"><div class="wrap">
+    <div>
+      <span class="pill"><i></i>Aprenda IA e ganhe indicando</span>
+      <h1>Indique.<br>Conecte.<br><span class="g">Ganhe.</span></h1>
+      <p class="lead">Aprenda a usar o ChatGPT e outras IAs com o nosso e-book e indique para quem você conhece. A cada pessoa que comprar pelo seu link, você ganha <b style="color:var(--white)" class="x-comm">R$ 10</b> de comissão.</p>
+      <div class="hero-cta">
+        <a href="https://chk.eduzz.com/8WPNKVGPOP" data-buy target="_blank" rel="noopener" class="btn btn-neon">Comprar o e-book · R$ 20 <svg width="18" height="18"><use href="#i-arrow"/></svg></a>
+        <a href="#" data-scroll="como" class="btn btn-ghost">Como indicar e ganhar</a>
+      </div>
+      <div class="trust">
+        <span><svg><use href="#i-check"/></svg>Pagamento seguro via Eduzz</span>
+        <span><svg><use href="#i-check"/></svg>Garantia de 7 dias</span>
+        <span><svg><use href="#i-shield"/></svg>Dados protegidos (LGPD)</span>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="orbit"></div>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="ph-bal"><small>Saldo disponível</small><div class="v">R$ 120,00</div><small style="color:var(--neon)">+ R$ 30,00 esta semana</small></div>
+        <div class="ph-row"><div><small>Indicações</small><b>14</b></div><div><small>Vendas</small><b>12</b></div></div>
+        <div style="margin-top:14px;font-size:12px;color:var(--mute)">Últimas comissões</div>
+        <div class="ph-item"><div class="ph-av">LM</div><div>Larissa M.<br><small style="color:var(--mute)">Comprou o e-book</small></div><span class="amt">+R$ 10</span></div>
+        <div class="ph-item"><div class="ph-av">RS</div><div>Rafael S.<br><small style="color:var(--mute)">Comprou o e-book</small></div><span class="amt">+R$ 10</span></div>
+        <div class="ph-item"><div class="ph-av">JC</div><div>Juliana C.<br><small style="color:var(--mute)">Cadastrou-se</small></div><span class="amt" style="color:var(--warn)">pendente</span></div>
+      </div>
+      <div class="float-card fc1"><div class="ic"><svg width="18" height="18"><use href="#i-users"/></svg></div><div>Nova indicação<small>Pedro entrou pelo seu link</small></div></div>
+      <div class="float-card fc2"><div class="ic"><svg width="18" height="18"><use href="#i-gift"/></svg></div><div>+ R$ 10,00<small>Comissão de venda</small></div></div>
+    </div>
+  </div></header>
+
+  <section class="sec" id="ebook"><div class="wrap">
+    <div class="ebk reveal">
+      <div class="ebk-cover"><div class="cover"><div class="cv-top"><svg width="34" height="34"><use href="#logo"/></svg><span>E-BOOK INDIKA</span></div><div class="cv-t"><span class="x-prod">Guia Prático de IA</span></div><div class="cv-s">ChatGPT e outras IAs para o dia a dia, o trabalho e os negócios</div><div class="cv-b">+ de 100 comandos prontos</div></div></div>
+      <div>
+        <span class="eyebrow">O produto</span>
+        <h2><span class="x-prod">Guia Prático de IA</span></h2>
+        <p class="sub">Um e-book direto ao ponto para quem quer usar inteligência artificial de verdade, mesmo sem saber nada de tecnologia.</p>
+        <ul class="rules">
+          <li><svg><use href="#i-check"/></svg>Como criar textos, legendas e mensagens com o ChatGPT</li>
+          <li><svg><use href="#i-check"/></svg>Comandos prontos para trabalho, estudos e vendas</li>
+          <li><svg><use href="#i-check"/></svg>IAs para criar imagens, vídeos e apresentações</li>
+          <li><svg><use href="#i-check"/></svg>Entregue no seu e-mail logo após a confirmação do pagamento</li>
+        </ul>
+        <div class="ebk-buy"><div><small>Pagamento único</small><b class="x-price">R$ 20</b></div><a href="https://chk.eduzz.com/8WPNKVGPOP" data-buy target="_blank" rel="noopener" class="btn btn-neon">Quero o e-book <svg width="18" height="18"><use href="#i-arrow"/></svg></a></div>
+        <p style="color:var(--mute2);font-size:13px;margin-top:12px">Garantia de 7 dias: não gostou, devolvemos seu dinheiro.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="video"><div class="wrap">
+    <div class="vid reveal">
+      <div><span class="eyebrow">Em 20 segundos</span><h2>Veja como funciona</h2><p class="sub">Aprenda IA com o e-book. Depois da compra, você recebe o convite para indicar e ganhar R$ 10 por cada venda feita pelo seu link.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px"><a href="https://chk.eduzz.com/8WPNKVGPOP" data-buy target="_blank" rel="noopener" class="btn btn-neon">Comprar o e-book</a><a href="#" data-scroll="como" class="btn btn-ghost">Como funciona a indicação</a></div></div>
+      <div class="vframe"><video src="video.mp4" poster="poster.jpg" controls playsinline preload="none"></video></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="como"><div class="wrap">
+    <div class="reveal"><span class="eyebrow">Como participar</span><h2>Três passos para começar.</h2><p class="sub">O programa de indicação é exclusivo para quem tem o e-book. Você ganha quando alguém que veio pelo seu link compra, e acompanha tudo aqui no app da INDIKA.</p></div>
+    <div class="steps">
+      <div class="step reveal"><span class="n">01</span><div class="ic"><svg><use href="#i-user"/></svg></div><h3>Compre o e-book</h3><p>Garanta o Guia Prático de IA. Logo após a compra, você recebe o convite para virar afiliado e ter seu link exclusivo.</p></div>
+      <div class="step reveal"><span class="n">02</span><div class="ic"><svg><use href="#i-wa"/></svg></div><h3>Compartilhe seu link</h3><p>Envie pelo WhatsApp com um toque. O sistema identifica automaticamente quem veio por você.</p></div>
+      <div class="step reveal"><span class="n">03</span><div class="ic"><svg><use href="#i-gift"/></svg></div><h3>Ganhe comissão</h3><p>Cada pessoa que comprar o e-book pelo seu link gera <span class="x-comm">R$ 10</span> para você, pagos via Pix 30 dias após cada venda.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="recompensas"><div class="wrap">
+    <div class="rw">
+      <div class="reveal">
+        <span class="eyebrow">Comissões</span>
+        <h2>Transparente do clique ao resgate.</h2>
+        <p class="sub">A comissão sai do valor de cada venda do e-book. Em vez de gastar com anúncio, a INDIKA divide a venda com quem indicou. Você acompanha cada comissão no seu painel.</p>
+        <ul class="rules">
+          <li><svg><use href="#i-check"/></svg>Você ganha <span class="x-comm">R$ 10</span> por cada e-book vendido pelo seu link.</li>
+          <li><svg><use href="#i-check"/></svg>Comissão só sobre as vendas que você mesmo trouxe. Sem níveis, sem pirâmide.</li>
+          <li><svg><use href="#i-check"/></svg>Depois da compra aprovada, a comissão é paga via Pix em 30 dias.</li>
+          <li><svg><use href="#i-check"/></svg>Programa exclusivo para clientes: quem compra o e-book recebe o convite para indicar.</li>
+          <li><svg><use href="#i-check"/></svg>Cada indicação é validada contra duplicidade e fraude antes de ser aprovada.</li>
+        </ul>
+      </div>
+      <div class="flow reveal">
+        <div class="flow-i"><div class="dot" style="background:rgba(92,200,255,.1);color:var(--blue)">1</div><div><h4>Clique no seu link</h4><p>A pessoa acessa o e-book pelo seu link de afiliado e fica vinculada a você.</p></div></div>
+        <div class="flow-i"><div class="dot" style="background:rgba(255,201,77,.1);color:var(--warn)">2</div><div><h4>Compra</h4><p>Ela paga com Pix ou cartão no checkout seguro da Eduzz.</p></div></div>
+        <div class="flow-i"><div class="dot" style="background:var(--neon-soft);color:var(--neon)">3</div><div><h4>Comissão</h4><p>Seus R$ 10 aparecem na hora no seu painel da INDIKA, e o e-book vai para o e-mail do cliente.</p></div></div>
+        <div class="flow-i"><div class="dot" style="background:var(--neon);color:#03140a"><svg width="20" height="20"><use href="#i-wallet"/></svg></div><div><h4>Pix</h4><p>30 dias depois da venda, a comissão cai na sua chave Pix cadastrada.</p></div></div>
+      </div>
+    </div>
+    <div class="notice reveal"><svg><use href="#i-info"/></svg><div><b>A INDIKA não é investimento.</b> Comissões não são lucro, rendimento ou ganho garantido: dependem exclusivamente de vendas reais do e-book feitas pelo seu link.</div></div>
+  </div></section>
+
+  <section class="sec" id="duvidas"><div class="wrap">
+    <div class="reveal"><span class="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div>
+    <div class="faq reveal">
+      <details><summary>Como faço para participar do programa de indicação?</summary><p>O programa de indicação é exclusivo para clientes. Ao comprar o e-book (R$ 20), você recebe o conteúdo completo e o convite para virar afiliado. Quem quiser só o e-book, sem indicar, também pode comprar normalmente.</p></details>
+      <details><summary>Quando eu ganho a comissão?</summary><p>Quando a pessoa que veio pelo seu link compra o e-book e o pagamento é aprovado. A comissão de R$ 10 aparece no seu painel e é paga via Pix 30 dias depois da venda. Compras reembolsadas dentro da garantia de 7 dias cancelam a comissão.</p></details>
+      <details><summary>Como recebo o e-book depois de comprar?</summary><p>Assim que o pagamento é aprovado, a Eduzz envia o acesso para o e-mail usado na compra. Confira também a caixa de spam.</p></details>
+      <details><summary>Como recebo minhas comissões?</summary><p>Via Pix, na chave cadastrada no seu perfil, 30 dias depois de cada venda. Você acompanha tudo em "Ver meus ganhos", sem precisar entrar em outra plataforma.</p></details>
+      <details><summary>Ganho em cima das indicações de quem eu indiquei?</summary><p>Não. Você ganha somente pelas vendas feitas diretamente pelo seu link. Não existem níveis.</p></details>
+      <details><summary>Posso indicar a mim mesmo ou criar várias contas?</summary><p>Não. Autoindicação, contas duplicadas e fraudes são proibidas e podem gerar o cancelamento das comissões.</p></details>
+      <details><summary>Meus dados estão seguros?</summary><p>Sim. O pagamento é feito no ambiente seguro da Eduzz, e a INDIKA não tem acesso aos dados do seu cartão. Dúvidas: indika.html@gmail.com.</p></details>
+    </div>
+  </div></section>
+
+  <div class="final reveal">
+    <span class="eyebrow">Comece agora</span>
+    <h2 style="margin:14px 0 14px">Aprenda IA hoje.<br>Indique e ganhe amanhã.</h2>
+    <p class="sub" style="margin:0 auto 30px">E-book com garantia de 7 dias. Comprou, recebe o convite para indicar.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="https://chk.eduzz.com/8WPNKVGPOP" data-buy target="_blank" rel="noopener" class="btn btn-neon">Comprar o e-book · R$ 20</a><a href="#" data-scroll="como" class="btn btn-ghost">Como funciona a indicação</a></div>
+  </div>
+
+  <footer><div class="wrap">
+    <a href="#inicio" class="logo" style="font-size:18px"><svg style="width:28px;height:28px"><use href="#logo"/></svg><span>INDI<b>KA</b></span></a>
+    <div style="display:flex;gap:20px;flex-wrap:wrap"><a href="#" data-modal="m-legal">Termos de uso</a><a href="#" data-modal="m-legal">Política de privacidade</a><a href="#" data-modal="m-legal">LGPD</a></div>
+    <div>© 2026 INDIKA · <a href="mailto:indika.html@gmail.com">indika.html@gmail.com</a><br><span style="font-size:12px">Pagamentos do e-book processados pela Eduzz.</span></div>
+  </div></footer>
+</div>
+
+<!-- ================= MODALS ================= -->
+
+<div class="modal" id="m-legal"><div class="sheet">
+  <div class="sheet-h"><h3>Regras e privacidade</h3><button data-close><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+  <p class="s">Resumo das regras do programa. Dúvidas: indika.html@gmail.com</p>
+  <ul class="rules" style="margin-top:0">
+    <li><svg><use href="#i-check"/></svg>O programa de indicação é exclusivo para clientes do e-book. O e-book também pode ser comprado por quem não quer indicar.</li>
+    <li><svg><use href="#i-check"/></svg>Comissão de um único nível: somente sobre vendas feitas diretamente pelo seu link.</li>
+    <li><svg><use href="#i-check"/></svg>E-book com garantia de 7 dias (direito de arrependimento). Compras reembolsadas cancelam a comissão.</li>
+    <li><svg><use href="#i-check"/></svg>O pagamento e a entrega do e-book são processados pela Eduzz. As comissões são pagas pela INDIKA via Pix, 30 dias após cada venda.</li>
+    <li><svg><use href="#i-check"/></svg>Não há rendimento, lucro ou ganho garantido.</li>
+    <li><svg><use href="#i-check"/></svg>Autoindicação, contas duplicadas e fraudes geram cancelamento das comissões.</li>
+    <li><svg><use href="#i-check"/></svg>Seus dados são tratados conforme a LGPD. Para pedir acesso, correção ou exclusão, escreva para indika.html@gmail.com.</li>
+  </ul>
+  <button class="btn btn-neon btn-block" data-close style="margin-top:22px">Entendi</button>
+</div></div>
+
+
+<script>
+(function(){
+"use strict";
+var AFF_URL=""; /* link de afiliação da Eduzz */
+var MAIL="mailto:indika.html@gmail.com?subject="+encodeURIComponent("Quero ser afiliado INDIKA");
+document.querySelectorAll("[data-aff]").forEach(function(a){if(AFF_URL){a.href=AFF_URL}else{a.href=MAIL;a.removeAttribute("target")}});
+var io=("IntersectionObserver" in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12}):null;
+document.querySelectorAll(".reveal").forEach(function(e){io?io.observe(e):e.classList.add("in")});
+document.querySelectorAll("[data-scroll]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();var t=document.getElementById(a.dataset.scroll);t&&t.scrollIntoView({behavior:"smooth"})})});
+document.addEventListener("click",function(e){
+  var m=e.target.closest("[data-modal]");if(m){e.preventDefault();document.getElementById(m.dataset.modal).classList.add("on");return}
+  if(e.target.closest("[data-close]")||e.target.classList.contains("modal")){document.querySelectorAll(".modal").forEach(function(x){x.classList.remove("on")})}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")document.querySelectorAll(".modal").forEach(function(x){x.classList.remove("on")})});
+document.getElementById("v-inicio").classList.add("on");
+/* indicação: guarda o código do link e repassa para o pagamento */
+(function(){var p=new URLSearchParams(location.search),r=(p.get("ref")||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+try{if(r)localStorage.setItem("indika_ref",r);else r=localStorage.getItem("indika_ref")||""}catch(e){}
+if(r)document.querySelectorAll("[data-buy]").forEach(function(a){a.href="https://chk.eduzz.com/8WPNKVGPOP?utm_source="+encodeURIComponent(r)+"&utm_medium=indika"})})();
+
+})();
+</script>
+</body>
+</html>
