@@ -140,7 +140,7 @@ input,select{font:inherit;color:inherit}
   <div class="nav2" id="nav2">
     <button data-tab="ganhos" class="on">Meus ganhos</button>
     <button data-tab="perfil">Meus dados</button>
-    <button data-tab="gestao" id="tab-gestao" class="hide">Gestão</button>
+    <button data-tab="gestao" id="btn-gestao" class="hide">Gestão</button>
   </div>
 
   <div id="tab-ganhos">
@@ -320,7 +320,7 @@ async function loadPanel(user) {
   me = await ensureProfile(user, pendingExtra);
   isAdmin = user.email.toLowerCase() === ADMIN && user.emailVerified;
   $("#hi").textContent = "Olá, " + (me.name || "").split(" ")[0] + " 👋";
-  $("#tab-gestao").classList.toggle("hide", !isAdmin);
+  $("#btn-gestao").classList.toggle("hide", !isAdmin);
   $("#hi-sub").textContent = isAdmin ? "Acesso de criador: indicação liberada e gestão completa." : "Acompanhe suas indicações e seus ganhos.";
   $("#pf-name").value = me.name || ""; $("#pf-phone").value = me.phone || ""; $("#pf-pix").value = me.pix || ""; $("#pf-email").value = me.email; $("#pf-code").value = me.code || "";
   let buyer = isAdmin;
