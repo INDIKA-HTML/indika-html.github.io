@@ -1,6 +1,6 @@
 /* INDIKA · aviso de manutenção das compras
    Para DESLIGAR o aviso quando o checkout voltar: troque true por false. */
-var INDIKA_MANUTENCAO = true;
+var INDIKA_MANUTENCAO = false;
 
 (function () {
   if (!INDIKA_MANUTENCAO) return;
